@@ -1,0 +1,24 @@
+environment: ${environment}
+
+# Rest API parameters
+rest:
+    protocol: http
+    host: ${rest_host}
+    basePath: /posintegration
+    username: ${rest_username}
+    password: ${rest_password}
+
+# Database PostgreSQL
+db:
+    url: ${db_url}
+    username: ${db_username}
+    password: ${db_password}
+    className: org.postgresql.Driver
+
+# MailHog API parameters 
+mail:
+    protocol: http
+    host: ${mail_host}
+    basePath: /api/v2
+    username: ${mail_username}
+    password: ${mail_password}

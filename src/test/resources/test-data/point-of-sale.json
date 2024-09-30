@@ -1,0 +1,8 @@
+{
+	"bic" : "AACSDE33DOT",
+	"iban" : "DE89370400440532013000",
+	"name" : "goldPos",
+	"solutionInfo" : "goldSolutionInfo",
+	"identifier" : "POS00JNBPCG85JD",
+	"authenticationKey" : "gold_auth"
+}
