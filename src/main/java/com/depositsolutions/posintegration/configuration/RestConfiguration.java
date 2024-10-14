@@ -11,9 +11,7 @@ public class RestConfiguration {
 	private String protocol;
 	private String host;
 	private String basePath;
-	private String username;
-	private String password;
-	
+
 	public String getBaseUrl() {
 		return protocol + "://" + host + basePath;
 	}

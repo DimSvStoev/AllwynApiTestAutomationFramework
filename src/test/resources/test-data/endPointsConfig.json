@@ -1,0 +1,7 @@
+{
+  "booksUrl": "/Books/",
+  "bookByIdUrl": "/Books/%d",
+  "authorsUrl": "/Authors/",
+  "authorByIdUrl": "/Authors/%d",
+  "booksByAuthorUrl": "/Authors/authors/books/%d"
+}

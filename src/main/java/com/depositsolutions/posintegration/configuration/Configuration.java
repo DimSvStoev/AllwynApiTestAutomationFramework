@@ -10,6 +10,4 @@ import lombok.Setter;
 public class Configuration {
 	private String environment;
 	private RestConfiguration rest;
-	private RestConfiguration mail;
-	private DbConfiguration db;
 }

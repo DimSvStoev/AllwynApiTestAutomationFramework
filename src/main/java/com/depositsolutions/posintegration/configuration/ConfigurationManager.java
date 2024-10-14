@@ -11,9 +11,13 @@ public class ConfigurationManager {
 	public Configuration loadConfigData() {
 		Yaml yaml = new Yaml(new Constructor(Configuration.class));
 		InputStream inputStream = this.getClass()
-			      .getClassLoader()
-			      .getResourceAsStream(CONFIG_FILE);
-		
+				.getClassLoader()
+				.getResourceAsStream(CONFIG_FILE);
+
+		if (inputStream == null) {
+			throw new RuntimeException("Configuration file not found: " + CONFIG_FILE);
+		}
+
 		return yaml.load(inputStream);
 	}
 }

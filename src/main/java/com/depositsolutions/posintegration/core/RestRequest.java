@@ -16,36 +16,12 @@ public class RestRequest {
 		this.requestSpecification = requestSpecification;
 	}
 
-	public Response uploadFile(String controlName, String file, Map<String, Object> pathParameters, String resourcePath) {
+	public <T> Response sendPostRequestWithBody(T bodyObject, String resourcePath) {
 		requestSpecification
-		.multiPart(controlName, FileUtil.getFileByName(file))
-		.pathParams(pathParameters);
+				.body(bodyObject)  // Добавяне на тяло на заявката
+				.contentType(ContentType.JSON);  // Увери се, че типът на съдържанието е JSON
 
-		return post(resourcePath);
-	}
-
-	public <T> Response sendPostRequest(Map<String, Object> pathParameters, T bodyObject, String resourcePath) {
-		requestSpecification
-		.pathParams(pathParameters)
-		.body(bodyObject);
-
-		return post(resourcePath);
-	}
-
-	public <T> Response sendPostRequest(Map<String, Object> pathParameters, List<T> bodyObjects, String resourcePath) {
-		requestSpecification
-		.pathParams(pathParameters)
-		.contentType(ContentType.JSON)
-		.body(bodyObjects);
-
-		return post(resourcePath);
-	}
-
-	public Response sendPostRequestWithQueryParams(Map<String, Object> queryParameters, String resourcePath) {
-		requestSpecification
-		.queryParams(queryParameters);
-
-		return post(resourcePath);
+		return post(resourcePath);  // Извикване на метода за изпращане на POST заявка
 	}
 	
 	public Response get(String resourcePath) {
@@ -54,5 +30,16 @@ public class RestRequest {
 
 	public Response post(String resourcePath) {
 		return requestSpecification.log().all().post(resourcePath);
+	}
+
+	public <T> Response sendPutRequestWithBody(T bodyObject, String resourcePath) {
+		requestSpecification
+				.body(bodyObject)
+				.contentType(ContentType.JSON);
+
+		return requestSpecification.log().all().put(resourcePath);
+	}
+	public <T> Response delete(String resourcePath) {
+		return requestSpecification.log().all().delete(resourcePath);
 	}
 }
