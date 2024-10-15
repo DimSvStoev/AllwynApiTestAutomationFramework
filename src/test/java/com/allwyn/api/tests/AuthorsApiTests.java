@@ -75,5 +75,21 @@ public class AuthorsApiTests extends BaseRestApi {
                 .body("firstName", everyItem(not(emptyString())))
                 .body("lastName", everyItem(not(emptyString())));
     }
+    @Test
+    public void createAuthor_WithInvalidBody_ShouldReturnBadRequest() {
+        String invalidRequestBody = "#$%@!";
+
+        Response response = restRequest.sendPostRequestWithBody(invalidRequestBody, AUTHORS_URL);
+        response.then().statusCode(HttpStatusCode.BAD_REQUEST.getCode());
+    }
+    @Test
+    public void getAuthorById_WithInvalidEndpoint_ShouldReturnBadRequest() {
+        String invalidAuthorId = "invalidAuthor123";
+        String endpointWithoutId = authorByIdEndpoint.substring(0, authorByIdEndpoint.lastIndexOf('/') + 1);
+
+        String updatedAuthorByIdEndpoint = endpointWithoutId + invalidAuthorId;
+        Response response = restRequest.get(updatedAuthorByIdEndpoint);
+        response.then().statusCode(HttpStatusCode.BAD_REQUEST.getCode());
+    }
 }
 
