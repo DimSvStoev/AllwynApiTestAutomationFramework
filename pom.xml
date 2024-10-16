@@ -24,7 +24,6 @@
 		<assertj-core.version>3.21.0</assertj-core.version>
 		<jackson.version>2.13.0</jackson.version>
 		<log4j.version>2.17.1</log4j.version>
-		<allure.version>2.20.1</allure.version>
 		<awaitility.version>4.2.0</awaitility.version>
 		<snakeyaml.version>1.29</snakeyaml.version>
 		<maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
@@ -129,14 +128,6 @@
 			<version>${jackson.version}</version>
 		</dependency>
 
-		<!-- Allure -->
-		<dependency>
-			<groupId>io.qameta.allure</groupId>
-			<artifactId>allure-junit5</artifactId>
-			<version>${allure.version}</version>
-			<scope>test</scope>
-		</dependency>
-
 		<!-- Awaitility -->
 		<dependency>
 			<groupId>org.awaitility</groupId>
@@ -183,18 +174,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${maven-surefire-plugin.version}</version>
 				<configuration>
-					<includes>
-						<include>**/*Test.java</include>
-					</includes>
-					<properties>
-						<property>
-							<name>listener</name>
-							<value>io.qameta.allure.junit5.AllureJunit5</value>
-						</property>
-					</properties>
-					<systemPropertyVariables>
-						<allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
-					</systemPropertyVariables>
+					<reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -202,12 +182,5 @@
 
 	<reporting>
 		<excludeDefaults>true</excludeDefaults>
-		<plugins>
-			<plugin>
-				<groupId>io.qameta.allure</groupId>
-				<artifactId>allure-maven</artifactId>
-				<version>${allure.version}</version>
-			</plugin>
-		</plugins>
 	</reporting>
 </project>
