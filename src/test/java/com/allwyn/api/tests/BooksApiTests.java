@@ -62,5 +62,27 @@ public class BooksApiTests extends BaseRestApi {
         Response response = restRequest.delete(bookByIdEndpoint);
         response.then().statusCode(HttpStatusCode.OK.getCode());
     }
+    @Test
+    public void createBook_WithInvalidBody_ShouldReturnBadRequest() {
+        String invalidRequestBody = "#$%@!";
+        Response response = restRequest.sendPostRequestWithBody(invalidRequestBody, BOOKS_URL);
+        validateBadRequest(response);
+    }
+
+    @Test
+    public void getBookById_WithInvalidEndpoint_ShouldReturnBadRequest() {
+        String invalidBookId = "testStringAsWrongData";
+        String updatedBookByIdEndpoint = formatInvalidBookByIdEndpoint(invalidBookId);
+        Response response = restRequest.get(updatedBookByIdEndpoint);
+        validateBadRequest(response);
+    }
+
+    private String formatInvalidBookByIdEndpoint(String invalidBookId) {
+        String endpointWithoutId = bookByIdEndpoint.substring(0, bookByIdEndpoint.lastIndexOf('/') + 1);
+        return endpointWithoutId + invalidBookId;
+    }
+    private void validateBadRequest(Response response) {
+        response.then().statusCode(HttpStatusCode.BAD_REQUEST.getCode());
+    }
 }
 
